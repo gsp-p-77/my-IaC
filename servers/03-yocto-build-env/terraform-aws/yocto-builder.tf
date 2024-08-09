@@ -4,10 +4,10 @@ provider "aws" {
 
 resource "aws_instance" "yocto_builder" {
   ami           = "ami-0a0e5d9c7acc336f1"  # Ubuntu 22.04 LTS in us-east-1 (update for your region)
-  instance_type = "c5a.16xlarge"             # Compute-optimized instance (~2.464 €/h, 64 vCPUs, 128 GiB memory)
+  instance_type = "g4ad.8xlarge"             # Compute-optimized instance (~1.73 €/h, 32 vCPUs, 128 GiB memory)
 
   # SSH key to connect to the instance
-  key_name = "yocto-builder-key"
+  key_name = "generic-key"
 
   # EBS volume (100 GiB SSD)
   root_block_device {
