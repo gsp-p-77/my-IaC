@@ -43,6 +43,7 @@ resource "aws_instance" "yocto_builder" {
               echo 'sudo apt-get install -y python3-pexpect xz-utils debianutils iputils-ping' >> /home/ubuntu/provision.sh
               echo 'sudo apt-get install -y python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev' >> /home/ubuntu/provision.sh
               echo 'sudo apt-get install -y pylint3 xterm' >> /home/ubuntu/provision.sh
+              echo 'sudo apt install -y zip' >> /home/ubuntu/provision.sh
               echo '' >> /home/ubuntu/provision.sh
               echo 'echo "Yocto build environment setup complete!"' >> /home/ubuntu/provision.sh
 
