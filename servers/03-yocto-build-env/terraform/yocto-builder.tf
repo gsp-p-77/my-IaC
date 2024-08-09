@@ -26,32 +26,28 @@ resource "aws_instance" "yocto_builder" {
     Name = "Yocto-Bitbake-Builder"
   }
 
-  # Improved provisioning script using user_data
   user_data = <<-EOF
               #!/bin/bash
-              set -e  # Exit immediately if a command exits with a non-zero status
-              set -x  # Print commands and their arguments as they are executed
-
-              # Redirect all output to a logfile for debugging purposes
+              set -e
+              set -x
               exec > /var/log/user-data.log 2>&1
 
-              # Update package lists
-              sudo apt-get update -y
+              # Create the provisioning script
+              echo '#!/bin/bash' > /home/ubuntu/provision.sh
+              echo 'set -e' >> /home/ubuntu/provision.sh
+              echo 'set -x' >> /home/ubuntu/provision.sh
+              echo '' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get update -y' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get install -y build-essential chrpath socat cpio python3 python3-pip' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get install -y python3-pexpect xz-utils debianutils iputils-ping' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get install -y python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev' >> /home/ubuntu/provision.sh
+              echo 'sudo apt-get install -y pylint3 xterm' >> /home/ubuntu/provision.sh
+              echo '' >> /home/ubuntu/provision.sh
+              echo 'echo "Yocto build environment setup complete!"' >> /home/ubuntu/provision.sh
 
-              # Install necessary packages for Yocto/Bitbake
-              sudo apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
-                                      build-essential chrpath socat cpio python3 python3-pip \
-                                      python3-pexpect xz-utils debianutils iputils-ping \
-                                      python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev \
-                                      pylint3 xterm
-
-              sudo locale-gen en_US.UTF-8
-              
-              # Install additional tools if needed
-              sudo apt-get install -y ccache
-
-              # Create a file to indicate that setup is complete
-              echo "Yocto build environment setup complete!" > /home/ubuntu/setup-complete.txt
+              # Make the script executable
+              chmod +x /home/ubuntu/provision.sh
               EOF
 }
 
