@@ -40,29 +40,10 @@ Vagrant.configure("2") do |config|
 	sudo locale-gen en_US.UTF-8
     
 	# Install bmap tool to flash sd cards
-	sudo apt install bmap-tools 
+	sudo apt install -y bmap-tools 
 
   SHELL
 
   # SSH access
-  config.ssh.insert_key = false
-
-  # Set up a custom hostname (optional)
-  config.vm.hostname = "yocto-build-machine"
-
-  #Optional: Clone poky from git
-  config.vm.provision "shell", inline: <<-SHELL
-   mkdir example
-   cd example
-   mkdir source
-   cd source
-   git clone git://git.yoctoproject.org/poky
-   cd poky
-   git checkout scarthgap
-   chown vagrant:vagrant /home/vagrant/example
-   chmod 755 /home/vagrant/example
-   
-  SHELL
-  
-  
+  config.ssh.insert_key = false  
 end
