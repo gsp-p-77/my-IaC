@@ -10,6 +10,15 @@ Vagrant.configure("2") do |config|
     vb.cpus = 4
   end
 
+
+  # Add access to USB of host
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--usbehci", "on"]
+	vb.customize ["modifyvm", :id, "--usbxhci", "on"]	
+	vb.customize ["modifyvm", :id, "--usbcardreader", "on"]		
+  end
+
+
   # Networking
   config.vm.network "private_network", ip: "192.168.33.12"
 
@@ -27,9 +36,12 @@ Vagrant.configure("2") do |config|
       python3-pip python3-pexpect xz-utils debianutils \
       iputils-ping python3-git python3-jinja2 python3-subunit \
       zstd liblz4-tool file locales libacl1 xterm
+        
+	sudo locale-gen en_US.UTF-8
     
-    sudo locale-gen en_US.UTF-8
-    
+	# Install bmap tool to flash sd cards
+	sudo apt install bmap-tools 
+
   SHELL
 
   # SSH access
