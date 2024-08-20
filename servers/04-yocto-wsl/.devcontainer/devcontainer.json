@@ -1,0 +1,24 @@
+{
+    "name": "Yocto Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--privileged"
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspaces/yocto,type=bind"
+    ],    
+    "user": "yocto",
+    "containerUser": "yocto",
+    "remoteUser": "yocto",    
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    }
+    "remoteUser": "yocto"
+}
