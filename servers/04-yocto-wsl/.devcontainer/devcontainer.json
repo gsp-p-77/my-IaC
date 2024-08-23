@@ -7,9 +7,9 @@
         "--privileged"
     ],
     "mounts": [
-        "source=${localWorkspaceFolder},target=/workspaces/yocto,type=bind"
-    ],    
-    "user": "yocto",
+        "source=yocto_build,target=/workspace/build,type=volume",
+		"source=${localWorkspaceFolder},target=/workspace/yocto,type=bind"
+    ],   
     "containerUser": "yocto",
     "remoteUser": "yocto",    
     "customizations": {
@@ -19,6 +19,5 @@
                 "ms-azuretools.vscode-docker"
             ]
         }
-    }
-    "remoteUser": "yocto"
+    }    
 }

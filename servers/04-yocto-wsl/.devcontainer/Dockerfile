@@ -12,7 +12,7 @@ ENV LC_ALL=en_US.UTF-8
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
     gawk wget git diffstat unzip texinfo gcc build-essential chrpath \
-    socat cpio python3 python3-pip python3-pexpect xz-utils debianutils 
+    socat cpio python3 python3-pip python3-pexpect xz-utils debianutils cmake
 
 RUN apt-get install -y locales
 
