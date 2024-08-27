@@ -22,9 +22,19 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 # Add docker compose-plugin
 sudo apt-get install -y docker-compose-plugin
 
-#Add ubuntu user to docker group
-usermod -aG docker ubuntu
+sudo adduser --disabled-password --gecos '' itadmin
+
+#Add itadmin user to docker group
+usermod -aG docker itadmin
 
 #Install unzip
 sudo apt install unzip -y
+
+#Install nginx and certbot
+sudo apt install -y nginx certbot python3-certbot-nginx
+
+#Install portainer
+docker volume create portainer_data
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.0
+
 
