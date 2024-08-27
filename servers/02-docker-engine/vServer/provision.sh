@@ -33,8 +33,16 @@ sudo apt install unzip -y
 #Install nginx and certbot
 sudo apt install -y nginx certbot python3-certbot-nginx
 
+sudo mkdir -p /etc/ssl/nginx
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/nginx/self-signed.key \
+  -out /etc/ssl/nginx/self-signed.crt \
+  -subj "/CN=188.245.158.254"
+
+
 #Install portainer
 docker volume create portainer_data
-docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.0
+docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.0
+
 
 
