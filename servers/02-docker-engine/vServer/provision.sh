@@ -20,7 +20,7 @@ sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Add docker compose-plugin
-sudo apt-get install -y docker-compose-plugin
+sudo apt-get install -y docker-compose-plugin docker-compose
 
 sudo adduser --disabled-password --gecos '' itadmin
 
@@ -32,13 +32,6 @@ sudo apt install unzip -y
 
 #Install nginx and certbot
 sudo apt install -y nginx certbot python3-certbot-nginx
-
-sudo mkdir -p /etc/ssl/nginx
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout /etc/ssl/nginx/self-signed.key \
-  -out /etc/ssl/nginx/self-signed.crt \
-  -subj "/CN=188.245.158.254"
-
 
 #Install portainer
 docker volume create portainer_data

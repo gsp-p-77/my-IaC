@@ -18,6 +18,16 @@ my docker engine and its deployed services, e.g. my personal web page
 
 ### Initial auto certificate
 - Configure new sub domain vserver01.gsw7711.de with an A record to point to public IP address of vServer
+
+- Create self signed certificates for nginx
+```
+sudo mkdir -p /etc/ssl/nginx
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/nginx/self-signed.key \
+  -out /etc/ssl/nginx/self-signed.crt \
+  -subj "/CN=<public-IP: Server>"
+```
+
 - Copy nginx-obtain-certificate.conf to /etc/nginx/nginx.conf
 ```
 cp nginx-obtain-certificate.conf /etc/nginx/nginx.conf
